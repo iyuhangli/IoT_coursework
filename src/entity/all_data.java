@@ -22,7 +22,7 @@ public class all_data {
     public all_data(String type, double value){
         this.dataType=type;
         this.value=value;
-        dataNo=allData.get((allData.size()-1)).dataNo+1;
+        this.dataNo=allData.get((allData.size()-1)).dataNo+1;
     }
 
     public all_data(){
@@ -46,6 +46,16 @@ public class all_data {
             System.out.println("Error in I/O moudle");
             System.exit(1);
         }
+    }
+
+    public static ArrayList<all_data> getAllValue(String type) throws FileNotFoundException {
+        allData= all_check.get();
+        for(int i=0;i<allData.size();i++){
+            if(allData.get(i).dataType.equals(type)){
+                allData.add(allData.get(i));
+            }
+        }
+        return allData;
     }
 
     public static ArrayList<Double> getDataValue(String type) throws FileNotFoundException {

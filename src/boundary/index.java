@@ -57,7 +57,7 @@ public class index extends JFrame {
         jbu[2].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new people_management();
                 dispose();
             }
         });

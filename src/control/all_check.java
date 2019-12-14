@@ -11,6 +11,8 @@ public class all_check {
 
     static ArrayList<all_data> allData = new ArrayList<all_data>();
     static ArrayList<rfid_data> rd = new ArrayList<rfid_data>();
+    static ArrayList<people_data> pd = new ArrayList<people_data>();
+
 
     public static ArrayList<all_data> get() throws FileNotFoundException {
         allData.clear();
@@ -42,6 +44,23 @@ public class all_check {
             rd.add(b);
         }
         return rd;
+    }
+
+    public static ArrayList<people_data> getPeople() throws FileNotFoundException {
+        pd.clear();
+        File fr= new File("./people_data.txt");
+        @SuppressWarnings("resource")
+        Scanner s = new Scanner(fr);
+        while(s.hasNext())
+        {
+            people_data a =new people_data();
+            a.id=s.nextInt();
+            a.name=s.next();
+            a.department=s.next();
+            a.authority=s.next();
+            pd.add(a);
+        }
+        return pd;
     }
 
 }

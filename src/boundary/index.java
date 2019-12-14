@@ -49,7 +49,7 @@ public class index extends JFrame {
         jbu[1].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new product_management();
                 dispose();
             }
         });

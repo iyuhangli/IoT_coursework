@@ -67,7 +67,6 @@ public class environmental_monitoring extends JFrame {
         initData();
     }
 
-
     public XYDataset createDataset(){
         XYSeriesCollection xySeriesCollection=new XYSeriesCollection();
         xySeriesCollection.addSeries(xySeriesT);
@@ -76,9 +75,7 @@ public class environmental_monitoring extends JFrame {
 
     public void dataFrom(){
         int i=0;
-
         xySeriesT.add(i,commlist.get(i));
-
     }
 
     private void initTemp() throws FileNotFoundException {
@@ -131,7 +128,6 @@ public class environmental_monitoring extends JFrame {
         chartPanel.setVisible(true);
 
     }
-
 
     private void initControl() {
         dataView4.setFocusable(false);
@@ -202,7 +198,6 @@ public class environmental_monitoring extends JFrame {
     private void initData() {
     }
 
-
     private void openSerialPort(ActionEvent evt){
         String comStr=(String) comSelect.getSelectedItem();
         int baudRate =9600;
@@ -236,7 +231,6 @@ public class environmental_monitoring extends JFrame {
     }
 
     private void closeSerialPort(ActionEvent evt){
-
     }
 
     private void sendData(java.awt.event.ActionEvent evt) {

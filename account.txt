@@ -1,3 +1,0 @@
-0138F300 in true
-00000000 in false
-00000000 out false

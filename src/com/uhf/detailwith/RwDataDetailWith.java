@@ -1,7 +1,8 @@
 package com.uhf.detailwith;
 
 import com.uhf.linkage.Linkage;
-import com.uhf.structures.*;
+import com.uhf.structures.OnRwListener;
+import com.uhf.structures.RwData;
 
 public class RwDataDetailWith implements OnRwListener {
 

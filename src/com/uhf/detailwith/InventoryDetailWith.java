@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.uhf.linkage.Linkage;
-import com.uhf.structures.*;
+import com.uhf.structures.InventoryData;
+import com.uhf.structures.OnInventoryListener;
 import com.uhf.utils.StringUtils;
 
 public class InventoryDetailWith implements OnInventoryListener {

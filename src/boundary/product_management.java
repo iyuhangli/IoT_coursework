@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import com.uhf.demo.UhfDemo;
 import com.uhf.linkage.Linkage;
 import entity.rfid_data;
 import control.*;
@@ -26,7 +27,7 @@ public class product_management extends JFrame{
         Font font = new Font("Times New Roman", Font.PLAIN, 25);
 
         PMInfo.setFont(font);
-        PMInfo.setBounds(295,50,209,40);
+        PMInfo.setBounds(291,50,217,40);
         this.add(PMInfo);
 
         RFIDResult.setBounds(295,200,209,40);
@@ -56,8 +57,10 @@ public class product_management extends JFrame{
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-              // String abc=uhf_demo.abc();
-               //System.out.println(abc);
+              String abc= UhfDemo.abc();
+              RFIDResult.setText(abc);
+              putIn.setEnabled(true);
+              putOut.setEnabled(true);
             }
         });
 

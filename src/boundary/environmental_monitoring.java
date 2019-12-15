@@ -47,6 +47,7 @@ public class environmental_monitoring extends JFrame {
     private JPanel temp=new JPanel();
 
     public ArrayList<Double> commlist = new ArrayList<Double>();
+    private List<String> commList = null;
     private SerialPort serialPort;
     XYSeries xySeriesT = new XYSeries("Temp");
 
@@ -60,73 +61,10 @@ public class environmental_monitoring extends JFrame {
         this.setDefaultCloseOperation(index.EXIT_ON_CLOSE);
         this.setVisible(true);
 
-        initTemp();
 
         initControl();
         actionListener();
         initData();
-    }
-
-    public XYDataset createDataset(){
-        XYSeriesCollection xySeriesCollection=new XYSeriesCollection();
-        xySeriesCollection.addSeries(xySeriesT);
-        return xySeriesCollection;
-    }
-
-    public void dataFrom(){
-        int i=0;
-        xySeriesT.add(i,commlist.get(i));
-    }
-
-    private void initTemp() throws FileNotFoundException {
-        commlist= all_data.getDataValue("te");
-        temp.setBounds(8,8,384,234);
-        temp.setVisible(true);
-        dataFrom();
-        jfreechart = ChartFactory.createXYLineChart(
-                null, null, null, createDataset(),
-                PlotOrientation.VERTICAL, false, true, false);
-
-        StandardChartTheme mChartTheme = new StandardChartTheme("CN");
-        mChartTheme.setLargeFont(new Font("Times New Roman", Font.BOLD, 20));
-        mChartTheme.setExtraLargeFont(new Font("Times New Roman", Font.PLAIN, 15));
-        mChartTheme.setRegularFont(new Font("Times New Roman", Font.PLAIN, 15));
-        ChartFactory.setChartTheme(mChartTheme);
-        jfreechart.setBorderPaint(new Color(0,204,205));
-        jfreechart.setBorderVisible(true);
-        XYPlot xyplot = (XYPlot) jfreechart.getPlot();
-        NumberAxis numberaxis = (NumberAxis) xyplot.getRangeAxis();
-        numberaxis.setLowerBound(0);
-        numberaxis.setUpperBound(100);
-        numberaxis.setTickUnit(new NumberTickUnit(100d));
-        numberaxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-        numberaxis.setLowerMargin(0); // 数据轴下（左）边距 ­
-        numberaxis.setMinorTickMarksVisible(false);// 标记线是否显示
-        numberaxis.setTickMarkInsideLength(0);// 外刻度线向内长度
-        numberaxis.setTickMarkOutsideLength(0);
-        // X轴的设计
-        NumberAxis x = (NumberAxis) xyplot.getDomainAxis();
-        x.setAutoRange(true);// 自动设置数据轴数据范围
-        // 自己设置横坐标的值
-        x.setAutoTickUnitSelection(false);
-        x.setTickUnit(new NumberTickUnit(60d));
-        // 设置最大的显示值和最小的显示值
-        x.setLowerBound(0);
-        x.setUpperBound(60);
-        // 数据轴的数据标签：只显示整数标签
-        x.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-        x.setAxisLineVisible(true);// X轴竖线是否显示
-        x.setTickMarksVisible(false);// 标记线是否显示
-        org.jfree.chart.ui.RectangleInsets offset = new RectangleInsets(0, 0, 0, 0);
-        xyplot.setAxisOffset(offset);// 坐标轴到数据区的间距
-        xyplot.setBackgroundAlpha(0.0f);// 去掉柱状图的背景色
-        xyplot.setOutlinePaint(null);// 去掉边框
-        // ChartPanel chartPanel = new ChartPanel(jfreechart);
-        // chartPanel.restoreAutoDomainBounds();//重置X轴
-        ChartPanel chartPanel = new ChartPanel(jfreechart, true);
-        temp.add(chartPanel);
-        chartPanel.setVisible(true);
-
     }
 
     private void initControl() {
@@ -172,7 +110,7 @@ public class environmental_monitoring extends JFrame {
         openCOM.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if("Open serial port".equals(openCOM.getText())&&serialPort==null){
+                if("Open".equals(openCOM.getText())&&serialPort==null){
                     openSerialPort(e);
                 }
                 else{
@@ -196,6 +134,20 @@ public class environmental_monitoring extends JFrame {
     }
 
     private void initData() {
+        commList = control.serial_port_manager.findPort();
+        // 检查是否有可用串口，有则加入选项中
+        if (commList == null || commList.size() < 1) {
+            System.out.println("No serial ports can be found.");
+        } else {
+            for (String s : commList) {
+                comSelect.addItem(s);
+            }
+            baudRateSelect.addItem("9600");
+            baudRateSelect.addItem("19200");
+            baudRateSelect.addItem("38400");
+            baudRateSelect.addItem("57600");
+            baudRateSelect.addItem("115200");
+        }
     }
 
     private void openSerialPort(ActionEvent evt){

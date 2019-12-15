@@ -1,7 +1,12 @@
 package control;
 
-import control.exception.*;
-import gnu.io.*;
+import gnu.io.CommPort;
+import gnu.io.CommPortIdentifier;
+import gnu.io.NoSuchPortException;
+import gnu.io.PortInUseException;
+import gnu.io.SerialPort;
+import gnu.io.SerialPortEventListener;
+import gnu.io.UnsupportedCommOperationException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,9 +15,12 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.TooManyListenersException;
 
+import control.exception.*;
+import control.array_utils;
+
 /**
  * 串口管理 serial port management
- * 
+ *
  * @author yangle
  */
 public class serial_port_manager {
@@ -84,17 +92,17 @@ public class serial_port_manager {
 		}
 	}
 	/**
-     * 往串口发送数据 Send data to the serial port
-     *
-     * @param serialPort
-     *            串口对象
-     * @param order
-     *            待发送数据
-     * @throws SendDataToSerialPortFailure
-     *             向串口发送数据失败
-     * @throws SerialPortOutputStreamCloseFailure
-     *             关闭串口对象的输出流出错
-     */
+	 * 往串口发送数据 Send data to the serial port
+	 *
+	 * @param serialPort
+	 *            串口对象
+	 * @param order
+	 *            待发送数据
+	 * @throws SendDataToSerialPortFailure
+	 *             向串口发送数据失败
+	 * @throws SerialPortOutputStreamCloseFailure
+	 *             关闭串口对象的输出流出错
+	 */
 	public static void sendToPort(SerialPort serialPort, byte[] order) throws SendDataToSerialPortFailure, SerialPortOutputStreamCloseFailure{
 		OutputStream outputStream = null;
 		try{
@@ -115,12 +123,12 @@ public class serial_port_manager {
 		}
 	}
 	/**
-     * 从串口读取数据 Read data from a serial port
-     *
-     * @param serialPort
-     *            当前已建立连接的SerialPort对象
-     * @return 读取到的数据 data have read
-     */
+	 * 从串口读取数据 Read data from a serial port
+	 *
+	 * @param serialPort
+	 *            当前已建立连接的SerialPort对象
+	 * @return 读取到的数据 data have read
+	 */
 	public static byte[] readFromPort(SerialPort serialPort) {
 		InputStream inputStream = null;
 		byte[] bytes = {};
@@ -148,15 +156,15 @@ public class serial_port_manager {
 	}
 
 	/**
-     * 添加监听器  Add a listener
-     *
-     * @param serialPort
-     *            串口对象
-     * @param listener
-     *            串口监听器
-     * @throws TooManyListeners
-     *             监听类对象过多
-     */
+	 * 添加监听器  Add a listener
+	 *
+	 * @param serialPort
+	 *            串口对象
+	 * @param listener
+	 *            串口监听器
+	 * @throws TooManyListeners
+	 *             监听类对象过多
+	 */
 	public static void addListener(SerialPort serialPort, SerialPortEventListener listener) throws TooManyListeners{
 		try{
 			serialPort.addEventListener(listener);

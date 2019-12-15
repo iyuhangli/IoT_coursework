@@ -2,8 +2,8 @@ package control;
 
 import com.uhf.detailwith.InventoryDetailWith;
 import com.uhf.linkage.Linkage;
-import com.uhf.structures.InventoryArea;
-import com.uhf.structures.RwData;
+
+import com.uhf.structures.*;
 import com.uhf.utils.StringUtils;
 
 import java.util.Map;
@@ -82,12 +82,12 @@ public class rfid_control {
         Linkage.getInstance().stopInventory();
     }
 
-    public static String tidRead(){
+    public static String tidRead() {
         RwData rwData = new RwData();
         byte[] password = StringUtils.stringToByte("00000000");
         int status =  1;
         while(status!=0) {
-            status=Linkage.getInstance().readTagSync(password, 2, 0, 2, 3000, rwData);//调用linkage中的tid读取函数 注意参数  Invoking the tid reading function in linkage and note the arguments
+            status=Linkage.getInstance().readTagSync(password, 2, 2, 2, 3000, rwData);//调用linkage中的tid读取函数 注意参数  Invoking the tid reading function in linkage and note the arguments
             //添加循环验证，避免读取失败 Add loop validation to avoid read failure
             if (status == 0) {
                 String result = "";

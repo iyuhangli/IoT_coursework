@@ -2,13 +2,7 @@ package com.uhf.linkage;
 
 import com.uhf.detailwith.InventoryDetailWith;
 import com.uhf.detailwith.RwDataDetailWith;
-import com.uhf.structures.InventoryArea;
-import com.uhf.structures.InventoryData;
-import com.uhf.structures.OnInventoryListener;
-import com.uhf.structures.OnRwListener;
-import com.uhf.structures.RwData;
-import com.uhf.structures.SerialNumber;
-import com.uhf.structures.SoftVersion;
+import com.uhf.structures.*;
 import com.uhf.utils.StringUtils;
 
 public class Linkage {
@@ -16,8 +10,8 @@ public class Linkage {
 	private OnRwListener onRwListener;
 	private static String path;
 
-	
-	
+
+
 	public Linkage(String strLibPath) {
 		System.load(strLibPath + "\\uhf.dll");
 		System.load(strLibPath + "\\uhfJni.dll");
@@ -81,11 +75,10 @@ public class Linkage {
 
 	public native int stopInventory();
 
-	public native int readTagSync(byte[] accessPassword, int memBank, int startAddr, int wordLen, int timeOutMs,
-			RwData rwData);
+	public native int readTagSync(byte[] accessPassword, int memBank, int startAddr, int wordLen, int timeOutMs, RwData rwData);
 
 	public native int writeTagSync(byte[] accessPassword, int memBank, int startAddr, int wordLen, byte[] pWriteData,
-			int timeOutMs, RwData rwData);
+								   int timeOutMs, RwData rwData);
 
 	// 初始化方法，连接设备
 	public static int initial(String port) {
@@ -104,7 +97,7 @@ public class Linkage {
 			// System.out.println("Open com success!");
 
 			if (Linkage.getInstance().getModuleSerialNumber(serialNumber) == 0) {
-				String serialNo = StringUtils.byteToHexString(serialNumber.snData, serialNumber.snLen);
+				String serialNo = com.uhf.utils.StringUtils.byteToHexString(serialNumber.snData, serialNumber.snLen);
 				serialNo = StringUtils.convertHexToString(serialNo);
 				// System.out.println("序列号" + serialNo);
 			} else {

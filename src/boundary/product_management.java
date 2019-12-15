@@ -3,6 +3,8 @@ package boundary;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import com.uhf.demo.UhfDemo;
 import com.uhf.linkage.Linkage;
@@ -16,6 +18,8 @@ public class product_management extends JFrame{
     private JButton putIn=new JButton("Put in");
     private JButton putOut=new JButton("Put out");
     private JButton backPM=new JButton("Back");
+    public ArrayList<rfid_data> rdCheck = new ArrayList<rfid_data>();
+
 
 
     public product_management(){
@@ -67,16 +71,53 @@ public class product_management extends JFrame{
         putIn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                rfid_data idata=new rfid_data(RFIDResult.getText(),"in");
-                idata.saveData();
+                int flag=0;
+                try {
+                    rdCheck=all_check.getRFID();
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+                for(int temp=0;temp<rdCheck.size();temp++){
+                    if(rdCheck.get(temp).tid.equals(RFIDResult.getText())&&rdCheck.get(temp).status.equals("true")&&rdCheck.get(temp).inout.equals("in")) {
+                        flag = 1;
+                    }
+                }
+                if(flag==0) {
+                    rfid_data idata = new rfid_data(RFIDResult.getText(), "in");
+                    idata.saveData();
+                    JOptionPane.showMessageDialog(null, "Good's operation OK.","OK", JOptionPane.INFORMATION_MESSAGE);
+
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Good is already in storage.","Warning", JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
 
         putOut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                rfid_data odata=new rfid_data(RFIDResult.getText(), "out");
-                odata.saveData();
+                int flag2=0;
+                try {
+                    rdCheck=all_check.getRFID();
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+                for(int temp=0;temp<rdCheck.size();temp++){
+                    if(rdCheck.get(temp).tid.equals(RFIDResult.getText())&&rdCheck.get(temp).status.equals("true")&&rdCheck.get(temp).inout.equals("in")) {
+                        rdCheck.get(temp).status="false";
+                        all_check.setRFID(rdCheck);
+                        flag2 = 1;
+                    }
+                }
+                if(flag2==1) {
+                    rfid_data idata = new rfid_data(RFIDResult.getText(), "out");
+                    idata.saveData();
+                    JOptionPane.showMessageDialog(null, "Good's operation OK.","OK", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Good is not in storage.","Warning", JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
 

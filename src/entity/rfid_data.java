@@ -10,12 +10,20 @@ import control.all_check;
 public class rfid_data {
     public String tid;
     public String inout;
+    public String status;
 
     public static ArrayList<rfid_data> rd = new ArrayList<rfid_data>();
 
     public rfid_data(String tid, String inout){
         this.tid=tid;
         this.inout=inout;
+        this.status="true";
+    }
+
+    public rfid_data(String tid, String inout, String status){
+        this.tid=tid;
+        this.inout=inout;
+        this.status=status;
     }
 
     public  rfid_data(){
@@ -26,7 +34,7 @@ public class rfid_data {
         try {
             FileWriter fw=new FileWriter(fname,true);
             BufferedWriter bw=new BufferedWriter(fw);
-            bw.write(tid+" "+inout+"\n");
+            bw.write(tid+" "+inout+" "+status+"\n");
             bw.close();
             fw.close();
         }

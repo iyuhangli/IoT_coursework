@@ -63,8 +63,13 @@ public class product_management extends JFrame{
             public void actionPerformed(ActionEvent e) {
               String abc= UhfDemo.abc();
               RFIDResult.setText(abc);
-              putIn.setEnabled(true);
-              putOut.setEnabled(true);
+              if(!abc.equals("")) {
+                  putIn.setEnabled(true);
+                  putOut.setEnabled(true);
+              }
+              else{
+                  RFIDResult.setText("No tag here!");
+              }
             }
         });
 

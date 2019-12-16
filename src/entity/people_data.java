@@ -9,17 +9,22 @@ import control.all_check;
 
 public class people_data {
     public int id;
+    public String rfidID;
     public String name;
     public String department;
     public String authority;
+    public String aval;
 
     public static ArrayList<people_data> pd = new ArrayList<people_data>();
 
-    public people_data(String name, String department, String authority){
-        this.id=pd.get((pd.size()-1)).id+1;
+    public people_data(String name, String ID, String department, String authority) throws FileNotFoundException {
+        pd=all_check.getPeople();
+        this.id=pd.get(pd.size()-1).id+1;
+        this.rfidID=ID;
         this.name=name;
         this.department=department;
         this.authority=authority;
+        this.aval="true";
     }
 
     public  people_data(){
@@ -30,7 +35,7 @@ public class people_data {
         try {
             FileWriter fw=new FileWriter(fname,true);
             BufferedWriter bw=new BufferedWriter(fw);
-            bw.write(id+" "+name+" "+department+" "+authority+"\n");
+            bw.write(id+" "+rfidID+" "+name+" "+department+" "+authority+" "+aval+"\n");
             bw.close();
             fw.close();
         }

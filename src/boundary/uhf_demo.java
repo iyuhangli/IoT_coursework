@@ -12,72 +12,72 @@ import java.util.Scanner;
 public class uhf_demo {
 	@SuppressWarnings("static-access")
 
-	public static void main (String[] args){
-		int i = Linkage.getInstance().initial("COM5");// 初始化连接设备,参数：端口号
-		// function：init， parameter：The port number
-		if (i == 0) {
-			System.out.println("connect success");
-			getInventoryArea();
-			setInventoryArea();
-			startInventory();
-			stopInventory();
-			for(int ii=0;ii<55;ii++){
-			control();}
+//	public static void main (String[] args){
+//		int i = Linkage.getInstance().initial("COM5");// 初始化连接设备,参数：端口号
+//		// function：init， parameter：The port number
+//		if (i == 0) {
+//			System.out.println("connect success");
+//			getInventoryArea();
+//			setInventoryArea();
+//			startInventory();
+//			stopInventory();
+//			for(int ii=0;ii<55;ii++){
+//			control();}
+//
+////			epcReadSync();
+////			epcWriteSync();
+////			userReadSync();
+////			userWriteSync();
+////			tidReadSync();
+//			Linkage.getInstance().deinit();
+//
+//
+//			// 盘点区域设置 setInventoryArea
+//			// 盘点区域获取 getInventoryArea
+//			// 开始盘点测试 startInventory
+//			// 停止盘点测试 stopInventory
+//			// epc同步读取 epcReadSync
+//			// epc同步写入 epcWriteSync
+//			// user同步读取 userReadSync
+//			// user同步写入 userWriteSync
+//			// tid同步读取 tidReadSync
+//			// 断开连接 deinit
+//		} else {
+//			System.out.println("connect failed");
+//		}
+//	}
 
-//			epcReadSync();
-//			epcWriteSync();
-//			userReadSync();
-//			userWriteSync();
-//			tidReadSync();
-			Linkage.getInstance().deinit();
-
-
-			// 盘点区域设置 setInventoryArea
-			// 盘点区域获取 getInventoryArea
-			// 开始盘点测试 startInventory
-			// 停止盘点测试 stopInventory
-			// epc同步读取 epcReadSync
-			// epc同步写入 epcWriteSync
-			// user同步读取 userReadSync
-			// user同步写入 userWriteSync
-			// tid同步读取 tidReadSync
-			// 断开连接 deinit
-		} else {
-			System.out.println("connect failed");
-		}
-	}
-
-	public static void control(){
-		System.out.println("Please select Read (0) or Write(1):");
-		Scanner row=new Scanner(System.in);
-		int ReadWrite=row.nextInt();
-		System.out.println("Please input area, locate, length:");
-		Scanner all=new Scanner(System.in);
-		String AreaLocateLength=all.nextLine();
-		String number[]= AreaLocateLength.split(" ");
-		int membank=Integer.parseInt(number[0]);
-		int startaddr=Integer.parseInt(number[1]);
-		int wordlen=Integer.parseInt(number[2]);
-
-		if(ReadWrite==0&&membank==1){
-			epcReadSync(startaddr,wordlen);
-		}
-		else if(ReadWrite==1&&membank==1){
-			epcWriteSync(startaddr,wordlen);
-		}
-		else if(ReadWrite==0&&membank==3){
-			userReadSync(startaddr,wordlen);
-		}
-		else if(ReadWrite==1&&membank==3){
-			userWriteSync(startaddr,wordlen);
-		}
-		else if(ReadWrite==0&&membank==2){
-			tidReadSync(startaddr,wordlen);
-		}
-		else {
-			System.out.println("Error, please try again.");
-		}
-	}
+//	public static void control(){
+//		System.out.println("Please select Read (0) or Write(1):");
+//		Scanner row=new Scanner(System.in);
+//		int ReadWrite=row.nextInt();
+//		System.out.println("Please input area, locate, length:");
+//		Scanner all=new Scanner(System.in);
+//		String AreaLocateLength=all.nextLine();
+//		String number[]= AreaLocateLength.split(" ");
+//		int membank=Integer.parseInt(number[0]);
+//		int startaddr=Integer.parseInt(number[1]);
+//		int wordlen=Integer.parseInt(number[2]);
+//
+//		if(ReadWrite==0&&membank==1){
+//			epcReadSync(startaddr,wordlen);
+//		}
+//		else if(ReadWrite==1&&membank==1){
+//			epcWriteSync(startaddr,wordlen);
+//		}
+//		else if(ReadWrite==0&&membank==3){
+//			userReadSync(startaddr,wordlen);
+//		}
+//		else if(ReadWrite==1&&membank==3){
+//			userWriteSync(startaddr,wordlen);
+//		}
+//		else if(ReadWrite==0&&membank==2){
+//			tidReadSync(startaddr,wordlen);
+//		}
+//		else {
+//			System.out.println("Error, please try again.");
+//		}
+//	}
 	// epc区的同步读取
 	public static void epcReadSync(int s,int w) {
 		byte[] password = StringUtils.stringToByte("00000000");

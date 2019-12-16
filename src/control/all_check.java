@@ -54,9 +54,11 @@ public class all_check {
         {
             people_data a =new people_data();
             a.id=s.nextInt();
+            a.rfidID=s.next();
             a.name=s.next();
             a.department=s.next();
             a.authority=s.next();
+            a.aval=s.next();
             pd.add(a);
         }
         return pd;
@@ -77,5 +79,21 @@ public class all_check {
             System.exit(1);
         }
     }
-
+    public static void setPeople(ArrayList<people_data> peo_data) {
+        try {
+            FileWriter fileWriter= new FileWriter("./people_data.txt");
+            BufferedWriter bufferedWriter= new BufferedWriter(fileWriter);
+            for(int j=0;j<peo_data.size();j++) {
+                bufferedWriter.write(peo_data.get(j).id+" "+peo_data.get(j).rfidID
+                        +" "+peo_data.get(j).name+" "+peo_data.get(j).department
+                        +" "+peo_data.get(j).authority+" "+peo_data.get(j).aval+"\n");
+            }
+            bufferedWriter.close();
+            fileWriter.close();
+        }
+        catch (IOException e) {
+            System.out.println("Error at I/O module");
+            System.exit(1);
+        }
+    }
 }

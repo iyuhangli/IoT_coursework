@@ -1,2 +1,2 @@
 1 a b c d true
-2 00000000 name nameee authority false
+2 00000000 name nameee authority true

@@ -39,6 +39,13 @@ public class people_management extends JFrame {
         this.setVisible(true);
         Font font = new Font("Times New Roman", Font.PLAIN, 25);
 
+        ImageIcon imageIcon=new ImageIcon("image/index_background.png");
+        JLabel lbBg = new JLabel(imageIcon);
+        lbBg.setBounds(0, 0, this.getSize().width, this.getSize().height);
+        //this.getContentPane().add(lbBg);
+        this.setContentPane(lbBg);
+
+
         PMPeopleInfo.setFont(font);
         PMPeopleInfo.setBounds(295,50,209,40);
         this.add(PMPeopleInfo);

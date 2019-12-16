@@ -60,6 +60,12 @@ public class environmental_monitoring extends JFrame {
         this.setTitle("Environmental monitoring");
         this.setDefaultCloseOperation(index.EXIT_ON_CLOSE);
         this.setVisible(true);
+        ImageIcon imageIcon=new ImageIcon("image/index_background.png");
+        JLabel lbBg = new JLabel(imageIcon);
+        lbBg.setBounds(0, 0, this.getSize().width, this.getSize().height);
+        //this.getContentPane().add(lbBg);
+        this.setContentPane(lbBg);
+
 
 
         initControl();

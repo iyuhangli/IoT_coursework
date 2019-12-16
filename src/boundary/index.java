@@ -1,6 +1,7 @@
 package boundary;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -13,6 +14,15 @@ public class index extends JFrame {
     public index() {
         this.setSize(800, 500);
         this.setLayout(null);
+        this.setResizable(false);
+
+        ImageIcon imageIcon=new ImageIcon("image/index_background.png");
+        JLabel lbBg = new JLabel(imageIcon);
+        lbBg.setBounds(0, 0, this.getSize().width, this.getSize().height);
+        //this.getContentPane().add(lbBg);
+        this.setContentPane(lbBg);
+
+
         jla =new JLabel("Welcome");
         jbu=new JButton[4];
         jbu[0]=new JButton("Environmental monitoring");
@@ -25,6 +35,15 @@ public class index extends JFrame {
         jbu[1].setBounds(125,320,200,30);
         jbu[2].setBounds(455,220,200,30);
         jbu[3].setBounds(455,320,200,30);
+        jbu[0].setContentAreaFilled(false);
+        jbu[0].setFocusPainted(false);
+        jbu[1].setContentAreaFilled(false);
+        jbu[1].setFocusPainted(false);
+        jbu[2].setContentAreaFilled(false);
+        jbu[2].setFocusPainted(false);
+        jbu[3].setContentAreaFilled(false);
+        jbu[3].setFocusPainted(false);
+
         this.add(jla);
         this.add(jbu[0]);
         this.add(jbu[1]);

@@ -31,6 +31,8 @@ public class product_management extends JFrame{
         this.setDefaultCloseOperation(index.EXIT_ON_CLOSE);
         this.setVisible(true);
         Font font = new Font("Times New Roman", Font.PLAIN, 25);
+        Font font2 = new Font("Times New Roman", Font.PLAIN, 20);
+        Font font3 = new Font("Times New Roman", Font.PLAIN, 15);
 
         ImageIcon imageIcon=new ImageIcon("image/index_background.png");
         JLabel lbBg = new JLabel(imageIcon);
@@ -42,20 +44,30 @@ public class product_management extends JFrame{
         PMInfo.setBounds(291,50,217,40);
         this.add(PMInfo);
 
-        RFIDResult.setBounds(295,200,209,40);
+        RFIDResult.setBounds(295,190,209,40);
         RFIDResult.setEditable(false);
+        RFIDResult.setFont(font2);
         this.add(RFIDResult);
 
-        start.setBounds(80,400,100,25);
-        putIn.setBounds(260,400,100,25);
-        putOut.setBounds(440,400,100,25);
-        backPM.setBounds(620,400,100,25);
+        start.setBounds(80,360,100,25);
+        putIn.setBounds(260,360,100,25);
+        putOut.setBounds(440,360,100,25);
+        backPM.setBounds(620,360,100,25);
         putIn.setEnabled(false);
         putOut.setEnabled(false);
         start.setFocusable(true);
         putIn.setFocusable(true);
         putOut.setFocusable(true);
         backPM.setFocusable(true);
+        start.setContentAreaFilled(false);
+        putOut.setContentAreaFilled(false);
+        putIn.setContentAreaFilled(false);
+        backPM.setContentAreaFilled(false);
+        start.setFont(font3);
+        putIn.setFont(font3);
+        putOut.setFont(font3);
+        backPM.setFont(font3);
+
 
 
         this.add(start);

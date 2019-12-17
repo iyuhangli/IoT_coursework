@@ -1,4 +1,4 @@
-package boundary;
+package control;
 
 import com.uhf.detailwith.InventoryDetailWith;
 import com.uhf.linkage.Linkage;

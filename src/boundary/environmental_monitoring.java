@@ -1,29 +1,15 @@
 package boundary;
 
+import control.exception.*;
+import gnu.io.SerialPort;
+import gnu.io.SerialPortEvent;
+import gnu.io.SerialPortEventListener;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
-
-import control.all_check;
-import control.exception.*;
-import entity.all_data;
-import gnu.io.*;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.StandardChartTheme;
-import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.axis.NumberTickUnit;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.plot.XYCrosshairState;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
 
 public class environmental_monitoring extends JFrame {
 
@@ -44,14 +30,9 @@ public class environmental_monitoring extends JFrame {
 
     private JTextField dataInput=new JTextField();
 
-    private JPanel temp=new JPanel();
-
-    public ArrayList<Double> commlist = new ArrayList<Double>();
     private List<String> commList = null;
     private SerialPort serialPort;
-    XYSeries xySeriesT = new XYSeries("Temp");
 
-    public static JFreeChart jfreechart=null;
 
     public environmental_monitoring() throws FileNotFoundException {
 

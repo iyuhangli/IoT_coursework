@@ -40,6 +40,7 @@ public class all_check {
             b.tid=s.next();
             b.inout=s.next();
             b.status=s.next();
+            b.savetime=s.next();
             rd.add(b);
         }
         return rd;
@@ -69,7 +70,7 @@ public class all_check {
             FileWriter fileWriter= new FileWriter("./rfid_data.txt");
             BufferedWriter bufferedWriter= new BufferedWriter(fileWriter);
             for(int j=0;j<rf_data.size();j++) {
-                bufferedWriter.write(rf_data.get(j).tid+" "+rf_data.get(j).inout+" "+rf_data.get(j).status+"\n");
+                bufferedWriter.write(rf_data.get(j).tid+" "+rf_data.get(j).inout+" "+rf_data.get(j).status+" "+rf_data.get(j).savetime+"\n");
             }
            bufferedWriter.close();
             fileWriter.close();

@@ -44,6 +44,9 @@ public class people_management extends JFrame {
         this.setVisible(true);
         Font font = new Font("Times New Roman", Font.PLAIN, 25);
         Font font2 = new Font("Times New Roman", Font.PLAIN, 15);
+        Font font3 = new Font("Times New Roman", Font.PLAIN, 15);
+
+
 
 
         ImageIcon imageIcon=new ImageIcon("image/index_background.png");
@@ -108,6 +111,15 @@ public class people_management extends JFrame {
         enableRFID.setFocusable(true);
         editInfo.setFocusable(true);
         backPMPeople.setFocusable(true);
+        startPeople.setContentAreaFilled(false);
+        enableRFID.setContentAreaFilled(false);
+        editInfo.setContentAreaFilled(false);
+        backPMPeople.setContentAreaFilled(false);
+        startPeople.setFont(font3);
+        enableRFID.setFont(font3);
+        editInfo.setFont(font3);
+        backPMPeople.setFont(font3);
+
 
         this.add(startPeople);
         this.add(enableRFID);

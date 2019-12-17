@@ -57,11 +57,7 @@ public class index extends JFrame {
         jbu[0].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    new environmental_monitoring();
-                } catch (FileNotFoundException ex) {
-                    ex.printStackTrace();
-                }
+                new select_place();
                 dispose();
             }
         });
@@ -85,7 +81,7 @@ public class index extends JFrame {
         jbu[3].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new select_type();
                 dispose();
             }
         });

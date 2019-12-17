@@ -21,15 +21,20 @@ public class people_management extends JFrame {
 
     private JLabel PMPeopleInfo=new JLabel("People management");
     private JTextField RFIDPeopleResult=new JTextField("");
-    private JTextField idtf=new JTextField("id");
-    private JTextField nametf=new JTextField("name");
-    private JTextField departmenttf=new JTextField("department");
-    private JTextField authority=new JTextField("authority");
-    private JTextField avaltf=new JTextField("available");
+    private JTextField idtf=new JTextField("");
+    private JTextField nametf=new JTextField("");
+    private JTextField departmenttf=new JTextField("");
+    private JTextField authority=new JTextField("");
+    private JTextField avaltf=new JTextField("");
     private JButton startPeople=new JButton("Inventory");
-    private JButton enableRFID=new JButton("Enable/disable");
+    private JButton enableRFID=new JButton("En/disable");
     private JButton editInfo=new JButton("Create/Edit");
     private JButton backPMPeople=new JButton("Back");
+    private JLabel idjl=new JLabel("ID");
+    private JLabel namejl=new JLabel("Name");
+    private JLabel deptjl=new JLabel("Dept");
+    private JLabel authjl=new JLabel("Authority");
+    private JLabel avaljl=new JLabel("Statu");
 
     public  people_management(){
         this.setSize(800, 500);
@@ -38,11 +43,12 @@ public class people_management extends JFrame {
         this.setDefaultCloseOperation(index.EXIT_ON_CLOSE);
         this.setVisible(true);
         Font font = new Font("Times New Roman", Font.PLAIN, 25);
+        Font font2 = new Font("Times New Roman", Font.PLAIN, 15);
+
 
         ImageIcon imageIcon=new ImageIcon("image/index_background.png");
         JLabel lbBg = new JLabel(imageIcon);
         lbBg.setBounds(0, 0, this.getSize().width, this.getSize().height);
-        //this.getContentPane().add(lbBg);
         this.setContentPane(lbBg);
 
 
@@ -52,28 +58,50 @@ public class people_management extends JFrame {
 
         RFIDPeopleResult.setBounds(295,220,209,40);
         RFIDPeopleResult.setEditable(false);
-        this.add(RFIDPeopleResult);
+        //this.add(RFIDPeopleResult);
 
-        idtf.setBounds(50, 310, 100, 40);
+        idjl.setBounds(200, 170, 40,40);
+        idjl.setFont(font2);
+        idtf.setBounds(240, 170, 100, 40);
         idtf.setEditable(false);
+        idtf.setFont(font2);
+        this.add(idjl);
         this.add(idtf);
-        nametf.setBounds(200, 310, 100, 40);
+
+        namejl.setBounds(85,280,50,40);
+        namejl.setFont(font2);
+        nametf.setBounds(135, 280, 100, 40);
         nametf.setEditable(false);
+        nametf.setFont(font2);
+        this.add(namejl);
         this.add(nametf);
-        departmenttf.setBounds(350, 310, 100, 40);
+        deptjl.setBounds(300,280,40,40);
+        deptjl.setFont(font2);
+        departmenttf.setBounds(340, 280, 100, 40);
         departmenttf.setEditable(false);
+        departmenttf.setFont(font2);
+        this.add(deptjl);
         this.add(departmenttf);
-        authority.setBounds(500, 310, 100, 40);
+        authjl.setFont(font2);
+        authjl.setBounds(505,280,70,40);
+        authority.setBounds(575, 280, 100, 40);
         authority.setEditable(false);
+        authority.setFont(font2);
+        this.add(authjl);
         this.add(authority);
-        avaltf.setBounds(650, 310, 100, 40);
+
+        avaljl.setBounds(420,170,60,40);
+        avaljl.setFont(font2);
+        avaltf.setBounds(480, 170, 100, 40);
+        avaltf.setFont(font2);
         avaltf.setEditable(false);
+        this.add(avaljl);
         this.add(avaltf);
 
-        startPeople.setBounds(80,400,100,25);
-        enableRFID.setBounds(260,400,100,25);
-        editInfo.setBounds(440,400,100,25);
-        backPMPeople.setBounds(620,400,100,25);
+        startPeople.setBounds(80,380,100,25);
+        enableRFID.setBounds(260,380,100,25);
+        editInfo.setBounds(440,380,100,25);
+        backPMPeople.setBounds(620,380,100,25);
         enableRFID.setEnabled(false);
         editInfo.setEnabled(false);
         startPeople.setFocusable(true);
@@ -113,7 +141,7 @@ public class people_management extends JFrame {
                         departmenttf.setText(pd.get(flag).department);
                         authority.setText(pd.get(flag).authority);
                         avaltf.setText(pd.get(flag).aval);
-                        editInfo.setText("Edit Info");
+                        editInfo.setText("Edit");
                         enableRFID.setEnabled(true);
                         if(pd.get(flag).aval.equals("true")){
                             enableRFID.setText("Disable");
@@ -173,11 +201,11 @@ public class people_management extends JFrame {
                     nametf.setEditable(false);
                     departmenttf.setEditable(false);
                     authority.setEditable(false);
-                    editInfo.setText("Edit Info");
+                    editInfo.setText("Edit");
                     JOptionPane.showMessageDialog(null, "Edit OK","OK", JOptionPane.INFORMATION_MESSAGE);
 
                 }
-                else if(editInfo.getText().equals("Edit Info")){
+                else if(editInfo.getText().equals("Edit")){
                     nametf.setEditable(true);
                     departmenttf.setEditable(true);
                     authority.setEditable(true);

@@ -16,6 +16,7 @@ public class index extends JFrame {
         this.setLayout(null);
         this.setResizable(false);
 
+        //this.setUndecorated(true);
         ImageIcon imageIcon=new ImageIcon("image/index_background.png");
         JLabel lbBg = new JLabel(imageIcon);
         lbBg.setBounds(0, 0, this.getSize().width, this.getSize().height);

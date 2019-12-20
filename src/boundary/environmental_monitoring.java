@@ -1,6 +1,7 @@
 package boundary;
 
 import control.exception.*;
+import entity.all_data;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
@@ -9,7 +10,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
+import control.*;
 
 public class environmental_monitoring extends JFrame {
 
@@ -28,36 +31,44 @@ public class environmental_monitoring extends JFrame {
     private JButton sendData=new JButton("Send");
     private JButton backEM=new JButton("Back");
 
+    private JLabel te=new JLabel("Temperature: normal");
+    private JLabel hu=new JLabel("Humidity: normal");
+    private JLabel li=new JLabel("Light: normal");
+
+
     private JTextField dataInput=new JTextField();
 
     private List<String> commList = null;
     private SerialPort serialPort;
+    public static ArrayList<all_data> allData = new ArrayList<all_data>();
+
 
 
     public environmental_monitoring() throws FileNotFoundException {
 
+        allData=all_check.get();
         this.setSize(800, 500);
         this.setLayout(null);
         this.setTitle("Environmental monitoring");
         this.setDefaultCloseOperation(index.EXIT_ON_CLOSE);
         this.setVisible(true);
-        ImageIcon imageIcon=new ImageIcon("image/index_background.png");
+        ImageIcon imageIcon=new ImageIcon("image/environmental_background.jpg");
         JLabel lbBg = new JLabel(imageIcon);
         lbBg.setBounds(0, 0, this.getSize().width, this.getSize().height);
         //this.getContentPane().add(lbBg);
         this.setContentPane(lbBg);
-
-
-
         initControl();
         actionListener();
         initData();
+
     }
 
     private void initControl() {
         dataView4.setFocusable(false);
         scrollData4.setBounds(396,234,380,139);
         this.add(scrollData4);
+        Font font =new Font("Times new roman",1,25);
+
 
         COMSetPanel.setBorder(BorderFactory.createTitledBorder("Set COM"));
         COMSetPanel.setBounds(396,378,140,80);
@@ -91,6 +102,16 @@ public class environmental_monitoring extends JFrame {
         backEM.setFocusable(false);
         backEM.setBounds(163,48,65,16);
         operationPanel.add(backEM);
+
+        te.setBounds(80,40,300,180);
+        hu.setBounds(480,40,300,180);
+        li.setBounds(120,260,300,180);
+        te.setFont(font);
+        hu.setFont(font);
+        li.setFont(font);
+        this.add(te);
+        this.add(hu);
+        this.add(li);
     }
 
     private void actionListener() {
@@ -185,6 +206,8 @@ public class environmental_monitoring extends JFrame {
 
     public class serial_listener implements SerialPortEventListener {
         public void serialEvent(SerialPortEvent serialPortEvent){
+            int wen=1,shi=1,guang=1;
+            String we,sh,gu;
             switch(serialPortEvent.getEventType()){
                 case SerialPortEvent.BI://Communication interruption
                     JOptionPane.showMessageDialog(null, "Communication interruption","Communication interruption", JOptionPane.ERROR_MESSAGE);
@@ -213,11 +236,46 @@ public class environmental_monitoring extends JFrame {
                             a=control.byte_utils.byteArrayToHexString2(data);
                             //System.out.println(a+"  "+a.charAt(7));
                             if((a.charAt(7))=='3') {
+                                we=a.substring(40,44);
+                                sh=a.substring(36,40);
+                                gu=a.substring(44,48);
+                                all_data ad=new all_data(we,sh,gu);
+                                ad.saveData();
+                                allData.add(ad);
                                 if ((a.charAt(44))>65){//if bigger than A***, red light
                                     control.serial_port_manager.sendToPort(serialPort, control.byte_utils.hexStr2Byte(red));
+                                    guang=0;
+                                    li.setText("Light: warning");
+                                    li.setForeground(Color.red);
                                 } else {
                                     control.serial_port_manager.sendToPort(serialPort, control.byte_utils.hexStr2Byte(green));
+                                    guang=1;
+                                    hu.setText("Light: normal");
+                                    hu.setForeground(Color.black);
                                 }
+                                if ((a.charAt(40))>65){//if bigger than A***, red light
+                                    control.serial_port_manager.sendToPort(serialPort, control.byte_utils.hexStr2Byte(red));
+                                    shi=0;
+                                    hu.setText("Humidity: warning");
+                                    hu.setForeground(Color.red);
+                                } else {
+                                    control.serial_port_manager.sendToPort(serialPort, control.byte_utils.hexStr2Byte(green));
+                                    shi=1;
+                                    hu.setText("Humidity: normal");
+                                    hu.setForeground(Color.black);
+                                }
+                                if ((a.charAt(36))>65){//if bigger than A***, red light
+                                    control.serial_port_manager.sendToPort(serialPort, control.byte_utils.hexStr2Byte(red));
+                                    wen=0;
+                                    te.setText("Temperature: warning");
+                                    te.setForeground(Color.red);
+                                } else {
+                                    control.serial_port_manager.sendToPort(serialPort, control.byte_utils.hexStr2Byte(green));
+                                    wen=1;
+                                    te.setText("Temperature: normal");
+                                    te.setForeground(Color.black);
+                                }
+
                             }
                         }
                     } catch(Exception e){
@@ -226,6 +284,7 @@ public class environmental_monitoring extends JFrame {
                         dispose();
                     }
             }
+            all_check.setAllData(allData);
         }
     }
 }

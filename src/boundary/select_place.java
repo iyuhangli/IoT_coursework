@@ -25,7 +25,7 @@ public class select_place extends JFrame {
         Font font2 = new Font("Times New Roman", Font.PLAIN, 20);
         Font font3 = new Font("Times New Roman", Font.PLAIN, 15);
 
-        ImageIcon imageIcon=new ImageIcon("image/index_background.png");
+        ImageIcon imageIcon=new ImageIcon("image/select_environmental_background.jpg");
         JLabel lbBg = new JLabel(imageIcon);
         lbBg.setBounds(0, 0, this.getSize().width, this.getSize().height);
         //this.getContentPane().add(lbBg);

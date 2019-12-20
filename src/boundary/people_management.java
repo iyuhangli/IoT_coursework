@@ -28,7 +28,7 @@ public class people_management extends JFrame {
     private JTextField avaltf=new JTextField("");
     private JButton startPeople=new JButton("Inventory");
     private JButton enableRFID=new JButton("En/disable");
-    private JButton editInfo=new JButton("Create/Edit");
+    private JButton editInfo=new JButton("New/Edit");
     private JButton backPMPeople=new JButton("Back");
     private JLabel idjl=new JLabel("ID");
     private JLabel namejl=new JLabel("Name");
@@ -49,7 +49,7 @@ public class people_management extends JFrame {
 
 
 
-        ImageIcon imageIcon=new ImageIcon("image/index_background.png");
+        ImageIcon imageIcon=new ImageIcon("image/people_background.png");
         JLabel lbBg = new JLabel(imageIcon);
         lbBg.setBounds(0, 0, this.getSize().width, this.getSize().height);
         this.setContentPane(lbBg);
@@ -133,8 +133,8 @@ public class people_management extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int flag=-1;
-                //String peopleResult = UhfDemo.abc();
-                String peopleResult="00000000";
+                String peopleResult = UhfDemo.abc();
+                //String peopleResult="00000000";
                 RFIDPeopleResult.setText(peopleResult);
                 if(!RFIDPeopleResult.equals("")){
                     try {

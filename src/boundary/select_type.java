@@ -23,10 +23,9 @@ public class select_type extends JFrame{
         this.setDefaultCloseOperation(index.EXIT_ON_CLOSE);
         this.setVisible(true);
         Font font = new Font("Times New Roman", Font.PLAIN, 25);
-        Font font2 = new Font("Times New Roman", Font.PLAIN, 20);
         Font font3 = new Font("Times New Roman", Font.PLAIN, 15);
 
-        ImageIcon imageIcon=new ImageIcon("image/index_background.png");
+        ImageIcon imageIcon=new ImageIcon("image/select_type_background.jpg");
         JLabel lbBg = new JLabel(imageIcon);
         lbBg.setBounds(0, 0, this.getSize().width, this.getSize().height);
         //this.getContentPane().add(lbBg);

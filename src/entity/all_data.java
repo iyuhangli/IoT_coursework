@@ -10,18 +10,17 @@ public class all_data {
 
 
     public int dataNo;
-    public String dataType;
-    public double value;
+    public String tem;
+    public String hum;
+    public String lig;
     public String saveTime;
     public static ArrayList<all_data> allData = new ArrayList<all_data>();
-    public static ArrayList<Double> data_value = new ArrayList<Double>();
-    public ArrayList<String> save_time = new ArrayList<String>();
 
 
-
-    public all_data(String type, double value){
-        this.dataType=type;
-        this.value=value;
+    public all_data(String tem, String hum,String lig){
+        this.tem=tem;
+        this.hum=hum;
+        this.lig=lig;
         this.dataNo=allData.get((allData.size()-1)).dataNo+1;
     }
 
@@ -38,7 +37,7 @@ public class all_data {
         try {
             FileWriter fw=new FileWriter(fname,true);
             BufferedWriter bw=new BufferedWriter(fw);
-            bw.write(dataType+" "+value+" "+ saveTime+"\n");
+            bw.write(tem+" "+hum+" "+lig+" "+ saveTime+"\n");
             bw.close();
             fw.close();
         }
@@ -48,32 +47,4 @@ public class all_data {
         }
     }
 
-    public static ArrayList<all_data> getAllValue(String type) throws FileNotFoundException {
-        allData= all_check.get();
-        for(int i=0;i<allData.size();i++){
-            if(allData.get(i).dataType.equals(type)){
-                allData.add(allData.get(i));
-            }
-        }
-        return allData;
-    }
-
-    public static ArrayList<Double> getDataValue(String type) throws FileNotFoundException {
-        allData= all_check.get();
-        for(int i=0;i<allData.size();i++){
-            if(allData.get(i).dataType.equals(type)){
-                data_value.add(allData.get(i).value);
-            }
-        }
-        return data_value;
-    }
-
-    public ArrayList<String> getSaveTime(String type) throws FileNotFoundException {
-        for(int i=0;i<allData.size();i++){
-            if(allData.get(i).dataType.equals(type)){
-                save_time.add(allData.get(i).saveTime);
-            }
-        }
-        return save_time;
-    }
 }

@@ -33,14 +33,14 @@ public class information_platform extends JFrame {
         backIP.setContentAreaFilled(false);
         backIP.setFocusPainted(false);
 
-        ImageIcon imageIcon=new ImageIcon("image/index_background.png");
+        ImageIcon imageIcon=new ImageIcon("image/information_background.png");
         JLabel lbBg = new JLabel(imageIcon);
         lbBg.setBounds(0, 0, this.getSize().width, this.getSize().height);
         //this.getContentPane().add(lbBg);
         this.setContentPane(lbBg);
 
         IPInfo.setFont(font);
-        IPInfo.setBounds(291,50,217,40);
+        IPInfo.setBounds(288,50,230,40);
         this.add(IPInfo);
         tableModel = (DefaultTableModel) jtable.getModel();
         if(a==0){
@@ -74,14 +74,15 @@ public class information_platform extends JFrame {
             e2.printStackTrace();
         }
 
-        Object[] o={"Data No.","Data type","Value", "Save time"};
+        Object[] o={"Data No.","Temperature data","Humidity data","Light data", "Save time"};
         tableModel.addColumn("Data No.");
-        tableModel.addColumn("Data type");
-        tableModel.addColumn("Value");
+        tableModel.addColumn("Temperature data");
+        tableModel.addColumn("Humidity data");
+        tableModel.addColumn("Light data");
         tableModel.addColumn("Save time");
         tableModel.addRow(o);
         for(int j=0;j<emdata.size();j++) {
-            Object[] t={emdata.get(j).dataNo,emdata.get(j).dataType,emdata.get(j).value,emdata.get(j).saveTime};
+            Object[] t={emdata.get(j).dataNo,emdata.get(j).tem,emdata.get(j).hum,emdata.get(j).lig,emdata.get(j).saveTime};
             tableModel.addRow(t);
         }
         jtable.setBounds(150,120,480,300);

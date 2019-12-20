@@ -21,8 +21,9 @@ public class all_check {
         {
             all_data a =new all_data();
             a.dataNo=s.nextInt();
-            a.dataType=s.next();
-            a.value=s.nextDouble();
+            a.tem=s.next();
+            a.hum=s.next();
+            a.lig=s.next();
             a.saveTime=s.next();
             allData.add(a);
         }
@@ -63,6 +64,22 @@ public class all_check {
             pd.add(a);
         }
         return pd;
+    }
+
+    public static void setAllData(ArrayList<all_data> rf_data) {
+        try {
+            FileWriter fileWriter= new FileWriter("./all_data.txt");
+            BufferedWriter bufferedWriter= new BufferedWriter(fileWriter);
+            for(int j=0;j<rf_data.size();j++) {
+                bufferedWriter.write(allData.get(j).dataNo+" "+allData.get(j).tem+" "+allData.get(j).hum+" "+allData.get(j).lig+" "+allData.get(j).saveTime+"\n");
+            }
+            bufferedWriter.close();
+            fileWriter.close();
+        }
+        catch (IOException e) {
+            System.out.println("Error at I/O module");
+            System.exit(1);
+        }
     }
 
     public static void setRFID(ArrayList<rfid_data> rf_data) {

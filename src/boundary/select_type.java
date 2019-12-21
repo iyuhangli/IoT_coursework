@@ -17,6 +17,7 @@ public class select_type extends JFrame{
 
 
     public select_type(){
+        this.setResizable(false);
         this.setSize(800, 500);
         this.setLayout(null);
         this.setTitle("Information platform");

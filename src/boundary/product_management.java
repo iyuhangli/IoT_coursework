@@ -25,6 +25,7 @@ public class product_management extends JFrame{
 
 
     public product_management(){
+        this.setResizable(false);
         this.setSize(800, 500);
         this.setLayout(null);
         this.setTitle("Environmental monitoring");

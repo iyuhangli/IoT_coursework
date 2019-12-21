@@ -45,7 +45,7 @@ public class environmental_monitoring extends JFrame {
 
 
     public environmental_monitoring() throws FileNotFoundException {
-
+        this.setResizable(false);
         allData=all_check.get();
         this.setSize(800, 500);
         this.setLayout(null);

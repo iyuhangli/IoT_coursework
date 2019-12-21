@@ -37,6 +37,7 @@ public class people_management extends JFrame {
     private JLabel avaljl=new JLabel("Statu");
 
     public  people_management(){
+        this.setResizable(false);
         this.setSize(800, 500);
         this.setLayout(null);
         this.setTitle("Environmental monitoring");

@@ -22,6 +22,7 @@ public class information_platform extends JFrame {
     ArrayList<rfid_data> rdata=new ArrayList<rfid_data>();
 
     public information_platform(int a){
+        this.setResizable(false);
         this.setSize(800, 500);
         this.setLayout(null);
         this.setTitle("Information platform");

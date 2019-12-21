@@ -16,6 +16,7 @@ public class select_place extends JFrame {
     private List<String> placeList = null;
 
     public select_place(){
+        this.setResizable(false);
         this.setSize(800, 500);
         this.setLayout(null);
         this.setTitle("Information platform");

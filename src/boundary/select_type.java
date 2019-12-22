@@ -1,7 +1,5 @@
 package boundary;
 
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

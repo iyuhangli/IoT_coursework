@@ -17,11 +17,12 @@ public class all_data {
     public static ArrayList<all_data> allData = new ArrayList<all_data>();
 
 
-    public all_data(String tem, String hum,String lig){
+    public all_data(String tem, String hum,String lig) throws FileNotFoundException {
+        allData=all_check.get();
         this.tem=tem;
         this.hum=hum;
         this.lig=lig;
-        this.dataNo=allData.get((allData.size()-1)).dataNo+1;
+        this.dataNo=allData.get((allData.size())-1).dataNo+1;
     }
 
     public all_data(){

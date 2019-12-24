@@ -12,23 +12,20 @@ import java.util.Scanner;
 public class UhfDemo {
 	@SuppressWarnings("static-access")
 
-
 	public static String abc() {
-		String tidReadResult="";
-
+		String temp="";
 		int i = Linkage.getInstance().initial("COM5");// 初始化连接设备,参数：端口号
 		// function：init， parameter：The port number
 		if (i == 0) {
 			System.out.println("connect success");
 			getInventoryArea();
 			setInventoryArea();
-			startInventory();
-			stopInventory();
+			//startInventory();
+			//stopInventory();
 			for(int ii=0;ii<55;ii++){
-				tidReadResult=tidReadSync(2,2);
-				if(tidReadResult!=""){
-					return tidReadResult;
-				}
+				temp=tidReadSync(1,2);
+				return temp;
+
 			}
 
 //			epcReadSync();
@@ -52,7 +49,8 @@ public class UhfDemo {
 		} else {
 			System.out.println("connect failed");
 		}
-		return tidReadResult;
+		return temp;
+
 	}
 
 	public static void control(){
@@ -102,7 +100,6 @@ public class UhfDemo {
 					if (rwData.rwDataLen > 0) {
 						result = StringUtils.byteToHexString(rwData.rwData,
 								rwData.rwDataLen);
-
 					}
 					if (rwData.epcLen > 0) {
 						epc = StringUtils
@@ -178,7 +175,7 @@ public class UhfDemo {
 		byte[] password = StringUtils.stringToByte("00000000");
 		int status =  1;
 		while(status!=0) {
-			status=Linkage.getInstance().readTagSync(password, 2, s, w, 3000, rwData);//调用linkage中的tid读取函数 注意参数  Invoking the tid reading function in linkage and note the arguments
+			status=Linkage.getInstance().readTagSync(password, 1, s, w, 3000, rwData);//调用linkage中的tid读取函数 注意参数  Invoking the tid reading function in linkage and note the arguments
 			//添加循环验证，避免读取失败 Add loop validation to avoid read failure
 			if (status == 0) {
 				String result = "";
@@ -187,7 +184,6 @@ public class UhfDemo {
 					if (rwData.rwDataLen > 0) {
 						result = StringUtils.byteToHexString(rwData.rwData,
 								rwData.rwDataLen);
-						return result;
 					}
 					if (rwData.epcLen > 0) {
 						epc = StringUtils
@@ -196,11 +192,12 @@ public class UhfDemo {
 					System.out.println("tidData====" + result);
 					System.out.println("epc====" + epc);
 					System.out.println("tid read success");
+					return result;
 				}
 			}
 			System.out.println("tid read failed");
 		}
-		return "i don't know";
+		return "";
 	}
 
 	public static void userWriteSync(int s,int w ) {
@@ -292,7 +289,7 @@ public class UhfDemo {
 		}
 		System.out.println("getInventoryArea failed");
 	}
- 
+
 	// 盘点区域设置 setInventoryArea
 	public static void setInventoryArea() {
 		InventoryArea inventoryArea = new InventoryArea();

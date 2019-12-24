@@ -228,7 +228,7 @@ public class people_management extends JFrame {
                     nametf.setEditable(true);
                     departmenttf.setEditable(true);
                     authority.setEditable(true);
-                    editInfo.setText("Add to database");
+                    editInfo.setText("Add");
                 }
                 else{
                     people_data p= null;

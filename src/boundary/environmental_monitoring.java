@@ -5,16 +5,23 @@ import entity.all_data;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
+
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+import javax.mail.*;
+import javax.mail.internet.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
+
 import control.*;
 
 public class environmental_monitoring extends JFrame {
+
 
     private JTextArea dataView4=new JTextArea();
     private JScrollPane scrollData4=new JScrollPane(dataView4);
@@ -170,7 +177,7 @@ public class environmental_monitoring extends JFrame {
                 serialPort=control.serial_port_manager.openPort(comStr,baudRate);
                 if(serialPort!=null){
                     dataView4.setText("Serial port is opened!"+"\r\n");
-                    openCOM.setText("Close");
+                    openCOM.setText("Off");
                 }
             } catch (PortInUse portInUse) {
                 portInUse.printStackTrace();
@@ -191,6 +198,9 @@ public class environmental_monitoring extends JFrame {
     }
 
     private void closeSerialPort(ActionEvent evt){
+        control.serial_port_manager.closePort(this.serialPort);
+        openCOM.setText("Open");
+        this.serialPort = null;
     }
 
     private void sendData(java.awt.event.ActionEvent evt) {
@@ -246,6 +256,7 @@ public class environmental_monitoring extends JFrame {
                                     control.serial_port_manager.sendToPort(serialPort, control.byte_utils.hexStr2Byte(red));
                                     guang=0;
                                     li.setText("Light: warning");
+                                    new control.MailUtils().mainn();
                                     li.setForeground(Color.red);
                                 } else {
                                     control.serial_port_manager.sendToPort(serialPort, control.byte_utils.hexStr2Byte(green));
@@ -257,6 +268,7 @@ public class environmental_monitoring extends JFrame {
                                     control.serial_port_manager.sendToPort(serialPort, control.byte_utils.hexStr2Byte(red));
                                     shi=0;
                                     hu.setText("Humidity: warning");
+                                    new control.MailUtils().mainn();
                                     hu.setForeground(Color.red);
                                 } else {
                                     control.serial_port_manager.sendToPort(serialPort, control.byte_utils.hexStr2Byte(green));
@@ -268,6 +280,7 @@ public class environmental_monitoring extends JFrame {
                                     control.serial_port_manager.sendToPort(serialPort, control.byte_utils.hexStr2Byte(red));
                                     wen=0;
                                     te.setText("Temperature: warning");
+                                    new control.MailUtils().mainn();
                                     te.setForeground(Color.red);
                                 } else {
                                     control.serial_port_manager.sendToPort(serialPort, control.byte_utils.hexStr2Byte(green));

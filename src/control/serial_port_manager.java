@@ -1,12 +1,8 @@
 package control;
 
-import gnu.io.CommPort;
-import gnu.io.CommPortIdentifier;
-import gnu.io.NoSuchPortException;
-import gnu.io.PortInUseException;
-import gnu.io.SerialPort;
-import gnu.io.SerialPortEventListener;
-import gnu.io.UnsupportedCommOperationException;
+import control.array_utils;
+import control.exception.*;
+import gnu.io.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,9 +10,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.TooManyListenersException;
-
-import control.exception.*;
-import control.array_utils;
 
 /**
  * 串口管理 serial port management
